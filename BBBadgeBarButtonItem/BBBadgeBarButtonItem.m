@@ -11,7 +11,7 @@
 
 // The badge displayed over the BarButtonItem
 @property (nonatomic) UILabel *badge;
-
+@property (nonatomic) UIButton *customButton;
 @end
 
 @implementation BBBadgeBarButtonItem
@@ -23,6 +23,7 @@
 {
     self = [self initWithCustomView:customButton];
     if (self) {
+        self.customButton = customButton;
         [self initializer];
     }
 
@@ -75,9 +76,9 @@
     CGFloat minWidth = expectedLabelSize.width;
     CGFloat padding = self.badgePadding;
 
-    // Using const we make sure the badge doesn't get too smal
+    // Using const we make sure the badge doesn't get too small
     minWidth = (minWidth < minHeight) ? minHeight : expectedLabelSize.width;
-    self.badge.frame = CGRectMake(self.badgeOriginX, self.badgeOriginY, minWidth + padding, minHeight + padding);
+    self.badge.frame = CGRectMake(self.customButton.frame.size.width - padding * 2, self.badgeOriginY, minWidth + padding, minHeight + padding);
     self.badge.layer.cornerRadius = (minHeight + padding) / 2;
     self.badge.layer.masksToBounds = YES;
 }
